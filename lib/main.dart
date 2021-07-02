@@ -62,7 +62,10 @@ class _MyAppState extends State<MyApp> {
                                 ));
                           });
                     },
-                    child: Text('Show Modal'),
+                    child: Text(
+                      'Show Modal',
+                      style: TextStyle(fontSize: 32),
+                    ),
                   );
                 },
               )),

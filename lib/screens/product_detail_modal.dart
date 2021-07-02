@@ -98,6 +98,27 @@ class _ProductDetailModalState extends State<ProductDetailModal> {
               ),
             ],
           )),
+          Positioned(
+              top: SizeConfig().getHeight(10),
+              left: SizeConfig().getHeight(10),
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    padding: MaterialStateProperty.all(EdgeInsets.zero),
+                    overlayColor: MaterialStateProperty.all(Colors.transparent),
+                    shape: MaterialStateProperty.all(CircleBorder()),
+                    minimumSize: MaterialStateProperty.all(Size(40, 40)),
+                    shadowColor: MaterialStateProperty.all(
+                        Colors.black26.withOpacity(.32)),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context, '');
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    size: 32,
+                    color: Colors.black26,
+                  )))
         ],
       ),
     );
