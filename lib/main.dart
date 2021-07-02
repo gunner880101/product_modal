@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
                                 resizeToAvoidBottomInset: false,
                                 backgroundColor: Colors.transparent,
                                 body: ProductDetailModal(
-                                  productInfo: provider.productInfo,
+                                  productInfo: provider.productInfo!,
                                 ));
                           });
                     },

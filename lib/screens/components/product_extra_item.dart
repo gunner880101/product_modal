@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:product_modal/models/product_extra_item_info.dart';
 
-class ProductExtraItemWidget extends StatefulWidget {
+class ProductExtraItem extends StatefulWidget {
   final ProductExtraItemInfo extraItemInfo;
-  const ProductExtraItemWidget({Key? key, required this.extraItemInfo})
+  const ProductExtraItem({Key? key, required this.extraItemInfo})
       : super(key: key);
 
   @override
-  _ProductExtraItemWidgetState createState() => _ProductExtraItemWidgetState();
+  _ProductExtraItemState createState() => _ProductExtraItemState();
 }
 
-class _ProductExtraItemWidgetState extends State<ProductExtraItemWidget> {
+class _ProductExtraItemState extends State<ProductExtraItem> {
   @override
   Widget build(BuildContext context) {
     String? nameCaption = int.parse(widget.extraItemInfo.price!) > 0

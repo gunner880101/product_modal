@@ -31,6 +31,7 @@ class ProductOrderManager with ChangeNotifier {
   int _productCount = 0;
   List<ProductExtraItemInfo> _extraItems = [];
   int _totalPrice = 0;
+  bool _isExtraRequired = false;
 
   int get productCount => _productCount;
 
@@ -38,8 +39,14 @@ class ProductOrderManager with ChangeNotifier {
 
   int get totalPrice => _totalPrice;
 
+  bool get isExtraRequired => _isExtraRequired;
+
   void setProductInfo({required ProductInfo productInfo}) {
     _productInfo = productInfo;
+    _productCount = 1;
+    _calcTotalPrice();
+    _checkExtraRequired();
+    notifyListeners();
   }
 
   void updateProductCount({required int count}) {
@@ -62,6 +69,20 @@ class ProductOrderManager with ChangeNotifier {
     notifyListeners();
   }
 
+  String getExtraSelectRange() {
+    if (_productInfo == null) {
+      return '';
+    }
+    int min = int.parse(_productInfo!.extras![0].min!);
+    int max = int.parse(_productInfo!.extras![0].max!);
+    if (min == max) {
+      return min == 1 ? 'Please select $min item' : 'Please select $min items';
+    } else if (min > 0) {
+      return 'Please select $min ~ $max item(s)';
+    }
+    return 'Please select at most $max item(s)';
+  }
+
   void _calcTotalPrice() {
     if (_productInfo == null) {
       _totalPrice = 0;
@@ -77,5 +98,9 @@ class ProductOrderManager with ChangeNotifier {
     if (_extraItems.length > int.parse(_productInfo!.extras![0].max!)) {
       _extraItems.removeAt(0);
     }
+  }
+
+  void _checkExtraRequired() {
+    _isExtraRequired = int.parse(_productInfo!.extras![0].min!) > 0;
   }
 }

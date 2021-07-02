@@ -1,0 +1,1 @@
+enum CountButtonType { add, remove }
