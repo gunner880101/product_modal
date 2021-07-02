@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:product_modal/models/product_extra_item_info.dart';
 import 'package:product_modal/models/product_info.dart';
+import 'package:product_modal/screens/components/product_extra_item_widget.dart';
 import 'package:product_modal/utils/size_config.dart';
 
 class ProductDetailModal extends StatefulWidget {
@@ -126,13 +126,16 @@ class _ProductDetailModalState extends State<ProductDetailModal> {
               Expanded(
                 flex: 3,
                 child: Container(
-                  padding: EdgeInsets.all(16),
-                  child: ListView(
-                    children: List.generate(
-                        widget.productInfo!.extra_items!.length,
-                        (index) => buildExtraItemWidget(
-                            itemInfo: widget
-                                .productInfo!.extra_items![index])).toList(),
+                  child: ListView.separated(
+                    itemCount: widget.productInfo!.extra_items!.length,
+                    itemBuilder: (context, index) {
+                      return ProductExtraItemWidget(
+                          extraItemInfo:
+                              widget.productInfo!.extra_items![index]);
+                    },
+                    separatorBuilder: (context, index) {
+                      return Divider();
+                    },
                   ),
                 ),
               )
@@ -140,25 +143,6 @@ class _ProductDetailModalState extends State<ProductDetailModal> {
           )),
         ],
       ),
-    );
-  }
-
-  Widget buildExtraItemWidget({required ProductExtraItemInfo itemInfo}) {
-    String? nameCaption = int.parse(itemInfo.price!) > 0
-        ? '${itemInfo.name} (${itemInfo.price})'
-        : itemInfo.name;
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Expanded(
-          child: Text(
-            nameCaption!,
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
-      ],
     );
   }
 }

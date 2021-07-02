@@ -26,7 +26,8 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(
           create: (context) => ProductInfoLoadNotifier(),
-        )
+        ),
+        ChangeNotifierProvider(create: (context) => ProductOrderManager()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
