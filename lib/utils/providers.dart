@@ -32,6 +32,9 @@ class ProductOrderManager with ChangeNotifier {
   List<ProductExtraItemInfo> _extraItems = [];
   int _totalPrice = 0;
   bool _isExtraRequired = false;
+  bool _isOnlyOneExtraSelectable = false;
+  var _curIndex;
+  bool _isAddableToCart = false;
 
   int get productCount => _productCount;
 
@@ -41,11 +44,18 @@ class ProductOrderManager with ChangeNotifier {
 
   bool get isExtraRequired => _isExtraRequired;
 
+  bool get isOnlyOneExtraSelectable => _isOnlyOneExtraSelectable;
+
+  get curIndex => _curIndex;
+
+  bool get isAddableToCart => _isAddableToCart;
+
   void setProductInfo({required ProductInfo productInfo}) {
     _productInfo = productInfo;
     _productCount = 1;
     _calcTotalPrice();
     _checkExtraRequired();
+    _checkAddableToCart();
     notifyListeners();
   }
 
@@ -61,11 +71,27 @@ class ProductOrderManager with ChangeNotifier {
 
   void addExtraItem({required ProductExtraItemInfo itemInfo}) {
     if (_extraItems.contains(itemInfo)) {
-      return;
+      _extraItems.remove(itemInfo);
+    } else {
+      _extraItems.add(itemInfo);
     }
-    _extraItems.add(itemInfo);
     _filterExtraItems();
     _calcTotalPrice();
+    _checkAddableToCart();
+    notifyListeners();
+  }
+
+  void selectExtraItem({required int index}) {
+    ProductExtraItemInfo temp = _productInfo!.extra_items![index];
+    if (_extraItems.contains(temp)) {
+      return;
+    }
+
+    _curIndex = index;
+    _extraItems.clear();
+    _extraItems.add(temp);
+    _calcTotalPrice();
+    _checkAddableToCart();
     notifyListeners();
   }
 
@@ -81,6 +107,19 @@ class ProductOrderManager with ChangeNotifier {
       return 'Please select $min ~ $max item(s)';
     }
     return 'Please select at most $max item(s)';
+  }
+
+  bool checkExtraItemSelected({required ProductExtraItemInfo itemInfo}) {
+    return _extraItems.contains(itemInfo);
+  }
+
+  void _checkAddableToCart() {
+    if (_productInfo == null) {
+      return;
+    }
+    int min = int.parse(_productInfo!.extras![0].min!);
+    int max = int.parse(_productInfo!.extras![0].max!);
+    _isAddableToCart = _extraItems.length >= min && _extraItems.length <= max;
   }
 
   void _calcTotalPrice() {
@@ -101,6 +140,14 @@ class ProductOrderManager with ChangeNotifier {
   }
 
   void _checkExtraRequired() {
-    _isExtraRequired = int.parse(_productInfo!.extras![0].min!) > 0;
+    if (_productInfo == null) {
+      return;
+    }
+    int min = int.parse(_productInfo!.extras![0].min!);
+    int max = int.parse(_productInfo!.extras![0].max!);
+    _isExtraRequired = min > 0;
+    if (min == max && min == 1) {
+      _isOnlyOneExtraSelectable = true;
+    }
   }
 }

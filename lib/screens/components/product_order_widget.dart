@@ -98,6 +98,7 @@ class _ProductOrderWidgetState extends State<ProductOrderWidget> {
               itemCount: widget.productInfo.extra_items!.length,
               itemBuilder: (context, index) {
                 return ProductExtraItem(
+                    index: index,
                     extraItemInfo: widget.productInfo.extra_items![index]);
               },
               separatorBuilder: (context, index) {
