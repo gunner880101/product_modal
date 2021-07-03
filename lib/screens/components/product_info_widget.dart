@@ -17,29 +17,31 @@ class ProductInfoWidget extends StatelessWidget {
         CachedNetworkImage(
           imageUrl: productInfo.images!.full_size!,
           width: SizeConfig.screenWidth,
-          height: SizeConfig.screenHeight! / 3,
+          height: SizeConfig.screenHeight! * 0.3,
           fit: BoxFit.cover,
           fadeInDuration: Duration(milliseconds: 500),
           fadeOutDuration: Duration(milliseconds: 500),
         ),
         Container(
-          padding: EdgeInsets.symmetric(vertical: 16),
+          padding: EdgeInsets.symmetric(vertical: SizeConfig().getHeight(8)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 24,
+                height: SizeConfig().getHeight(4),
               ),
               Text(
                 productInfo.name!,
-                style: TextStyle(fontSize: 32),
+                style: TextStyle(fontSize: SizeConfig().getHeight(24)),
               ),
               SizedBox(
-                height: 12,
+                height: SizeConfig().getHeight(12),
               ),
               Text(
                 productInfo.full_description!,
-                style: TextStyle(fontSize: 16, color: Colors.black45),
+                style: TextStyle(
+                    fontSize: SizeConfig().getHeight(14),
+                    color: Colors.black45),
               ),
             ],
           ),

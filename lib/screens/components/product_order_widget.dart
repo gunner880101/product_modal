@@ -29,23 +29,24 @@ class _ProductOrderWidgetState extends State<ProductOrderWidget> {
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black26),
           ),
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(SizeConfig().getHeight(16)),
           child: Row(
             children: [
               Expanded(
                 child: Text(
                   '${widget.productInfo.price}',
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: SizeConfig().getHeight(20)),
                 ),
               ),
               ProductCountUpdateButton(buttonType: CountButtonType.remove),
               Consumer<ProductOrderManager>(
                 builder: (context, provider, _) {
                   return Container(
-                    constraints: BoxConstraints(minWidth: 80),
+                    constraints:
+                        BoxConstraints(minWidth: SizeConfig().getHeight(60)),
                     child: Text(
                       '${provider.productCount}',
-                      style: TextStyle(fontSize: 24),
+                      style: TextStyle(fontSize: SizeConfig().getHeight(20)),
                       textAlign: TextAlign.center,
                     ),
                   );
@@ -57,23 +58,25 @@ class _ProductOrderWidgetState extends State<ProductOrderWidget> {
         ),
         Container(
           color: Colors.brown.withOpacity(0.3),
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(SizeConfig().getHeight(6)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 widget.productInfo.extras![0].name!,
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: SizeConfig().getHeight(18)),
               ),
               SizedBox(
-                width: 16,
+                width: SizeConfig().getHeight(12),
               ),
               Consumer<ProductOrderManager>(
                 builder: (context, provider, _) {
                   return Text(
                     provider.isExtraRequired ? '(REQUIRED)' : '(OPTIONAL)',
-                    style: TextStyle(fontSize: 24, color: Colors.black45),
+                    style: TextStyle(
+                        fontSize: SizeConfig().getHeight(16),
+                        color: Colors.black45),
                   );
                 },
               ),
@@ -83,11 +86,11 @@ class _ProductOrderWidgetState extends State<ProductOrderWidget> {
         Container(
           width: SizeConfig.screenWidth,
           color: Colors.brown.withOpacity(0.4),
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(SizeConfig().getHeight(6)),
           child: Consumer<ProductOrderManager>(builder: (context, provider, _) {
             return Text(
               orderProvider.getExtraSelectRange(),
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: SizeConfig().getHeight(10)),
               textAlign: TextAlign.start,
             );
           }),

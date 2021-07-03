@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:product_modal/models/product_extra_item_info.dart';
 import 'package:product_modal/utils/providers.dart';
+import 'package:product_modal/utils/size_config.dart';
 import 'package:provider/provider.dart';
 
 class ProductExtraItem extends StatefulWidget {
@@ -27,7 +28,7 @@ class _ProductExtraItemState extends State<ProductExtraItem> {
             ? CheckboxListTile(
                 title: Text(
                   nameCaption!,
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: SizeConfig().getHeight(20)),
                 ),
                 onChanged: (bool? value) => onCheckItemSelected(),
                 value: provider.checkExtraItemSelected(
@@ -36,7 +37,7 @@ class _ProductExtraItemState extends State<ProductExtraItem> {
             : RadioListTile(
                 title: Text(
                   nameCaption!,
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: SizeConfig().getHeight(20)),
                 ),
                 onChanged: (val) => onRadioItemSelected(val),
                 value: widget.index,

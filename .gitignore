@@ -44,3 +44,12 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Firebase
+firebase.json
+/.firebase
+.firebaserc
+.gitignore
+index.html
+/lib/generated_plugin_registrant.dart
+/.github/workflows/firebase-hosting-pull-request.yml

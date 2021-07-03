@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:product_modal/utils/enum_util.dart';
 import 'package:product_modal/utils/providers.dart';
+import 'package:product_modal/utils/size_config.dart';
 import 'package:provider/provider.dart';
 
 class ProductCountUpdateButton extends StatefulWidget {
@@ -36,7 +37,7 @@ class _ProductCountUpdateButtonState extends State<ProductCountUpdateButton> {
                       provider.productCount == 1
                   ? Colors.brown.withOpacity(0.4)
                   : Colors.brown,
-              size: 32,
+              size: SizeConfig().getHeight(32),
             ));
       },
     );

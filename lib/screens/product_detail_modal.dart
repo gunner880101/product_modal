@@ -48,7 +48,7 @@ class _ProductDetailModalState extends State<ProductDetailModal> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(30),
+                padding: EdgeInsets.all(SizeConfig().getHeight(12)),
                 child: Consumer<ProductOrderManager>(
                   builder: (context, provider, _) {
                     return GestureDetector(
@@ -61,15 +61,16 @@ class _ProductDetailModalState extends State<ProductDetailModal> {
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.CENTER,
                             timeInSecForIosWeb: 3,
-                            fontSize: 16.0);
+                            fontSize: SizeConfig().getHeight(16));
                       },
                       child: Container(
                         width: SizeConfig.screenWidth,
-                        height: 60,
+                        height: SizeConfig().getHeight(36),
                         color: provider.isAddableToCart
                             ? Color.fromARGB(200, 80, 40, 40)
                             : Color.fromARGB(50, 80, 40, 40),
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: SizeConfig().getHeight(16)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,17 +78,19 @@ class _ProductDetailModalState extends State<ProductDetailModal> {
                             Icon(
                               Icons.shopping_cart,
                               color: Colors.white,
-                              size: 40,
+                              size: SizeConfig().getHeight(24),
                             ),
                             Text(
                               'ADD ${provider.productCount} TO CART',
-                              style:
-                                  TextStyle(fontSize: 32, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: SizeConfig().getHeight(20),
+                                  color: Colors.white),
                             ),
                             Text(
                               '${provider.totalPrice}',
-                              style:
-                                  TextStyle(fontSize: 28, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: SizeConfig().getHeight(18),
+                                  color: Colors.white),
                             ),
                           ],
                         ),
@@ -99,15 +102,17 @@ class _ProductDetailModalState extends State<ProductDetailModal> {
             ],
           )),
           Positioned(
-              top: SizeConfig().getHeight(10),
-              left: SizeConfig().getHeight(10),
+              top: SizeConfig().getHeight(16),
+              left: SizeConfig().getHeight(16),
               child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.white),
                     padding: MaterialStateProperty.all(EdgeInsets.zero),
                     overlayColor: MaterialStateProperty.all(Colors.transparent),
                     shape: MaterialStateProperty.all(CircleBorder()),
-                    minimumSize: MaterialStateProperty.all(Size(40, 40)),
+                    minimumSize: MaterialStateProperty.all(Size(
+                        SizeConfig().getHeight(40),
+                        SizeConfig().getHeight(40))),
                     shadowColor: MaterialStateProperty.all(
                         Colors.black26.withOpacity(.32)),
                   ),
@@ -116,7 +121,7 @@ class _ProductDetailModalState extends State<ProductDetailModal> {
                   },
                   child: Icon(
                     Icons.arrow_back,
-                    size: 32,
+                    size: SizeConfig().getHeight(32),
                     color: Colors.black26,
                   )))
         ],
